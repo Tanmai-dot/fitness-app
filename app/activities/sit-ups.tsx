@@ -10,7 +10,6 @@ export default function SitUpsScreen() {
 		</ThemedView>
 	);
 }
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -18,5 +17,7 @@ const styles = StyleSheet.create({
 		gap: 8,
 	},
 });
+
+
 
 

@@ -110,3 +110,130 @@ const styles = StyleSheet.create({
     gap: 8,
   },
 });
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+
+// const Collapsible = ({ title, children }) => {
+//   const [isOpen, setIsOpen] = useState(false);
+
+//   const ChevronDown = () => (
+//     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-pink-500 transition-transform duration-300">
+//       <path d="M6 9l6 6 6-6" />
+//     </svg>
+//   );
+
+//   const ChevronUp = () => (
+//     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 text-pink-500 transition-transform duration-300">
+//       <path d="M18 15l-6-6-6 6" />
+//     </svg>
+//   );
+
+//   return (
+//     <div className="border border-gray-200 rounded-3xl p-5 my-5 shadow-lg bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50 hover:shadow-2xl transition-all duration-300">
+//       <button
+//         onClick={() => setIsOpen(!isOpen)}
+//         className="flex justify-between items-center w-full text-lg font-bold text-gray-800 focus:outline-none"
+//       >
+//         {title}
+//         <span className={`${isOpen ? 'transform rotate-180' : ''}`}>
+//           {isOpen ? <ChevronUp /> : <ChevronDown />}
+//         </span>
+//       </button>
+//       <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'}`}>
+//         <div className="pt-3 text-gray-700 border-t border-gray-300 mt-3 space-y-2">
+//           {children}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// const App = () => {
+//   const heroImageUrl = "https://images.unsplash.com/photo-1549060292-62a2652b047a?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1920&h=1080&fit=crop";
+//   const reactLogoUrl = "https://cdn.iconscout.com/icon/free/png-512/react-1-282599.png";
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-purple-50 to-indigo-100 font-sans antialiased text-gray-800">
+//       <div className="relative">
+//         {/* Hero Section */}
+//         <div
+//           className="w-full h-96 bg-cover bg-center relative overflow-hidden rounded-b-3xl shadow-xl"
+//           style={{ backgroundImage: `url(${heroImageUrl})` }}
+//         >
+//           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black opacity-50"></div>
+//           <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+//             <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tight drop-shadow-2xl">
+//               Explore Your Fitness Journey
+//             </h1>
+//             <p className="mt-4 text-xl sm:text-2xl font-medium drop-shadow-lg">
+//               Discover workouts, tips, and motivation to reach your goals.
+//             </p>
+//           </div>
+//         </div>
+
+//         {/* Main Content */}
+//         <main className="container mx-auto px-4 sm:px-6 lg:px-8 -mt-32 relative z-20">
+//           <div className="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 border border-gray-200">
+//             <p className="text-lg text-gray-700 mb-10 max-w-3xl mx-auto text-center leading-relaxed">
+//               Welcome to your personalized fitness hub! Explore workouts, learn healthy habits, and track your progress.
+//               Each section below will guide you through tips, tools, and inspiration to help you stay motivated and consistent.
+//             </p>
+
+//             <Collapsible title="Workout Routines">
+//               <p>
+//                 Our curated routines include strength training, cardio, and flexibility exercises for all levels. Find the plan that fits your lifestyle and start today.
+//               </p>
+//               <p>
+//                 Consistency is key! Even 20 minutes a day can create long-term results.
+//               </p>
+//             </Collapsible>
+
+//             <Collapsible title="Nutrition Tips">
+//               <p>
+//                 Fuel your body with the right nutrients. Learn about balanced meals, pre-workout snacks, and post-workout recovery meals to boost your performance.
+//               </p>
+//               <p>
+//                 Stay hydrated and enjoy delicious, healthy recipes designed to energize your day.
+//               </p>
+//             </Collapsible>
+
+//             <Collapsible title="Track Your Progress">
+//               <p>
+//                 Monitor your strength, endurance, and flexibility. Set achievable goals, log your workouts, and celebrate small victories along the way.
+//               </p>
+//               <p>
+//                 Progress tracking keeps you motivated and helps you adapt your routine for maximum results.
+//               </p>
+//             </Collapsible>
+
+//             <Collapsible title="Community & Motivation">
+//               <p>
+//                 Join a vibrant community of fitness enthusiasts. Share your milestones, get inspired by others, and never miss a chance to encourage someone else.
+//               </p>
+//               <p>
+//                 Motivation is contagious! Stay accountable with friends and fellow fitness explorers.
+//               </p>
+//             </Collapsible>
+
+//           </div>
+//         </main>
+
+//         {/* Footer */}
+//         <footer className="container mx-auto p-6 text-center text-gray-600 mt-16">
+//           <p>
+//             Designed with ❤️ by Fitness Explorers using React and Tailwind CSS.
+//           </p>
+//         </footer>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default App;

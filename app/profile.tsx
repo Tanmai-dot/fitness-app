@@ -11,7 +11,7 @@ type RegisteredInfo = {
     phone: string;
 };
 
-export default function ProfileScreen() {
+export default function ProfileScreen(): React.JSX.Element {
     const registeredInfo: RegisteredInfo = useMemo(() => ({
         fullName: 'Alex Johnson',
         email: 'alex.j@example.com',
@@ -42,20 +42,32 @@ export default function ProfileScreen() {
         return '';
     }, [weight, weightTouched]);
 
+    /**
+     * Prompts the user to select an image from their device's media library.
+     * 
+     * - Requests permission to access the media library. If permission is not granted,
+     *   displays an alert and exits early.
+     * - Launches the image picker allowing the user to select and optionally edit an image.
+     * - If an image is selected (not canceled), updates the photo URI state with the selected image's URI.
+     * 
+     * @async
+     * @function
+     * @returns {Promise<void>} Resolves when the image selection process is complete.
+     */
     const pickImage = useCallback(async () => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
-            Alert.alert('Permission required', 'We need access to your photos to select an image.');
+            Alert.alert('Permission required', 'Permission to access media library is required!');
             return;
         }
         const result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [1, 1],
-            quality: 0.8,
+            quality: 0.7,
         });
-        if (!result.canceled) {
-            setPhotoUri(result.assets[0]?.uri ?? null);
+        if (!result.canceled && result.assets && result.assets.length > 0) {
+            setPhotoUri(result.assets[0].uri);
         }
     }, []);
 

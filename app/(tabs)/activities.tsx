@@ -1,5 +1,5 @@
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View, FlatList, ScrollView } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -17,17 +17,20 @@ const activities: { name: ActivityType; href: string; description: string; image
 
 export default function ActivitiesTab() {
 	return (
-		<ThemedView style={styles.container}>
-			<View>
-				<ThemedText type="title">Choose Your Arena</ThemedText>
-				<ThemedText type="default">Select an activity below to start a new session and track your performance.</ThemedText>
-			</View>
-			<View style={styles.grid}>
-				{activities.map((a) => (
-					<ActivityCard key={a.name} name={a.name} description={a.description} imageId={a.imageId} href={a.href} />
-				))}
-			</View>
-		</ThemedView>
+		<ScrollView style={styles.scrollContainer}>
+			<ThemedView style={styles.container}>
+				<View>
+					<ThemedText type="title">Choose Your Arena</ThemedText>
+					<ThemedText type="default">Select an activity below to start a new session and track your performance.</ThemedText>
+				</View>
+				<View style={styles.grid}>
+					{activities.map((a) => (
+						<ActivityCard key={a.name} name={a.name} description={a.description} imageId={a.imageId} href={a.href} />
+					))}
+				</View>
+			
+			</ThemedView>
+		</ScrollView>
 	);
 }
 
@@ -47,6 +50,9 @@ function ActivityCard({ name, description, imageId, href }: { name: ActivityType
 }
 
 const styles = StyleSheet.create({
+	scrollContainer: {
+		flex: 1,
+	},
 	container: {
 		flex: 1,
 		padding: 16,
@@ -70,5 +76,28 @@ const styles = StyleSheet.create({
 	cardBody: {
 		padding: 10,
 		gap: 4,
+	},
+	testimonialsSection: {
+		marginTop: 24,
+		gap: 12,
+	},
+	testimonialsList: {
+		paddingHorizontal: 4,
+	},
+	testimonialCard: {
+		width: 280,
+		marginRight: 12,
+		padding: 16,
+		borderRadius: 12,
+		backgroundColor: 'rgba(127,127,127,0.05)',
+		gap: 8,
+	},
+	testimonialText: {
+		fontStyle: 'italic',
+		lineHeight: 20,
+	},
+	testimonialName: {
+		textAlign: 'right',
+		opacity: 0.8,
 	},
 });

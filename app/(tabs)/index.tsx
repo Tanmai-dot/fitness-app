@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, View, FlatList } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -15,6 +15,13 @@ const activities: { name: ActivityType; href: string; description: string; image
 	{ name: 'Sit-ups', href: '/activities/sit-ups', description: 'Count your reps and check form.', imageId: 'sit-ups-card' },
 	{ name: 'Push-ups', href: '/activities/push-ups', description: 'Build upper body strength.', imageId: 'push-ups-card' },
 	{ name: 'High Jump', href: '/activities/high-jump', description: 'Test your vertical leap.', imageId: 'high-jump-card' },
+];
+
+const testimonials = [
+	{ id: '1', name: 'Amit Sharma', feedback: 'This app made my fitness journey smooth and enjoyable. Love the progress tracking!' },
+	{ id: '2', name: 'Riya Patel', feedback: 'Very easy to use and helps me stay consistent. Highly recommended!' },
+	{ id: '3', name: 'Vikram Singh', feedback: 'The workout plans are perfect for beginners like me. I feel more confident.' },
+	{ id: '4', name: 'Sneha Iyer', feedback: 'Simple, clean, and effective. I\'ve seen real results in 3 months.' },
 ];
 
 export default function HomeScreen() {
@@ -50,25 +57,24 @@ export default function HomeScreen() {
 				<StatCard title="Valued Clients" value="500+" subtitle="Trusted by organizations" />
 			</View>
 
-			{/* Top Performers (simple list) */}
+			{/* Testimonials */}
 			<ThemedView style={styles.section}>
-				<ThemedText type="subtitle">Top Performers · Running</ThemedText>
-				{topRunning.map((entry) => (
-					<View key={entry.user.id} style={styles.leaderRow}>
-						<View style={styles.leaderLeft}>
-							<Image source={{ uri: entry.user.avatarUrl }} style={styles.avatar} contentFit="cover" />
-							<View>
-								<ThemedText type="defaultSemiBold">{entry.user.fullName}</ThemedText>
-								<ThemedText type="default">
-									{entry.user.state}{entry.user.village ? `, ${entry.user.village}` : ''}
-								</ThemedText>
-							</View>
-						</View>
-						<ThemedText type="defaultSemiBold">
-							{entry.score}
-							<ThemedText> {entry.metric}</ThemedText>
-						</ThemedText>
-					</View>
+				<ThemedText type="subtitle">What Our Users Say</ThemedText>
+				<FlatList
+					horizontal
+					data={testimonials}
+					keyExtractor={(item) => item.id}
+					renderItem={({ item }) => <TestimonialCard {...item} />}
+					showsHorizontalScrollIndicator={false}
+					contentContainerStyle={styles.testimonialsList}
+				/>
+			</ThemedView>
+
+			{/* Top Performers */}
+			<ThemedView style={styles.section}>
+				<ThemedText type="subtitle">🏆 Leaderboard · Running</ThemedText>
+				{topRunning.map((entry, index) => (
+					<RankingCard key={entry.user.id} entry={entry} rank={index + 1} />
 				))}
 			</ThemedView>
 		</ScrollView>
@@ -111,10 +117,54 @@ function ActivityCard({ name, description, imageId }: { name: ActivityType; desc
 	);
 }
 
+function TestimonialCard({ name, feedback }: { name: string; feedback: string }) {
+	return (
+		<View style={styles.testimonialCard}>
+			<ThemedText type="default" style={styles.testimonialText}>"{feedback}"</ThemedText>
+			<ThemedText type="defaultSemiBold" style={styles.testimonialName}>- {name}</ThemedText>
+		</View>
+	);
+}
+
+function RankingCard({ entry, rank }: { entry: any; rank: number }) {
+	const getMedal = (rank: number) => {
+		switch (rank) {
+			case 1: return '🥇';
+			case 2: return '🥈';
+			case 3: return '🥉';
+			default: return `${rank}`;
+		}
+	};
+
+	const getRankStyle = (rank: number) => {
+		if (rank <= 3) return styles.topRankCard;
+		return styles.regularRankCard;
+	};
+
+	return (
+		<View style={[styles.rankingCard, getRankStyle(rank)]}>
+			<View style={styles.rankBadge}>
+				<ThemedText style={styles.rankText}>{getMedal(rank)}</ThemedText>
+			</View>
+			<Image source={{ uri: entry.user.avatarUrl }} style={styles.rankAvatar} contentFit="cover" />
+			<View style={styles.rankInfo}>
+				<ThemedText type="defaultSemiBold">{entry.user.fullName}</ThemedText>
+				<ThemedText type="default" style={styles.location}>
+					{entry.user.state}{entry.user.village ? `, ${entry.user.village}` : ''}
+				</ThemedText>
+			</View>
+			<View style={styles.scoreContainer}>
+				<ThemedText type="title" style={styles.scoreValue}>{entry.score}</ThemedText>
+				<ThemedText type="default" style={styles.scoreMetric}>{entry.metric}</ThemedText>
+			</View>
+		</View>
+	);
+}
+
 const styles = StyleSheet.create({
 	container: {
-		padding: 16,
-		gap: 16,
+		padding: 20,
+		gap: 20,
 	},
 	section: {
 		gap: 8,
@@ -178,5 +228,78 @@ const styles = StyleSheet.create({
 		height: 36,
 		borderRadius: 18,
 		backgroundColor: '#ccc',
+	},
+	testimonialsList: {
+		paddingHorizontal: 4,
+	},
+	testimonialCard: {
+		width: 280,
+		marginRight: 12,
+		padding: 16,
+		borderRadius: 12,
+		backgroundColor: 'rgba(127,127,127,0.05)',
+		gap: 8,
+	},
+	testimonialText: {
+		fontStyle: 'italic',
+		lineHeight: 20,
+	},
+	testimonialName: {
+		textAlign: 'right',
+		opacity: 0.8,
+	},
+	rankingCard: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		padding: 16,
+		borderRadius: 16,
+		marginVertical: 4,
+		gap: 12,
+	},
+	topRankCard: {
+		backgroundColor: 'rgba(255,215,0,0.1)',
+		borderWidth: 2,
+		borderColor: 'rgba(255,215,0,0.3)',
+	},
+	regularRankCard: {
+		backgroundColor: 'rgba(127,127,127,0.05)',
+	},
+	rankBadge: {
+		width: 40,
+		height: 40,
+		borderRadius: 20,
+		backgroundColor: 'rgba(127,127,127,0.1)',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	rankText: {
+		fontSize: 18,
+		fontWeight: '600',
+	},
+	rankAvatar: {
+		width: 50,
+		height: 50,
+		borderRadius: 25,
+		backgroundColor: '#ccc',
+	},
+	rankInfo: {
+		flex: 1,
+		gap: 2,
+	},
+	location: {
+		opacity: 0.7,
+		fontSize: 14,
+	},
+	scoreContainer: {
+		alignItems: 'flex-end',
+		gap: 2,
+	},
+	scoreValue: {
+		fontSize: 20,
+		color: '#007AFF',
+	},
+	scoreMetric: {
+		fontSize: 12,
+		opacity: 0.7,
 	},
 });
