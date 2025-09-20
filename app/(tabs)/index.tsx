@@ -18,10 +18,20 @@ const activities: { name: ActivityType; href: string; description: string; image
 ];
 
 const testimonials = [
-	{ id: '1', name: 'Amit Sharma', feedback: 'This app made my fitness journey smooth and enjoyable. Love the progress tracking!' },
-	{ id: '2', name: 'Riya Patel', feedback: 'Very easy to use and helps me stay consistent. Highly recommended!' },
-	{ id: '3', name: 'Vikram Singh', feedback: 'The workout plans are perfect for beginners like me. I feel more confident.' },
-	{ id: '4', name: 'Sneha Iyer', feedback: 'Simple, clean, and effective. I\'ve seen real results in 3 months.' },
+	{ id: '1', name: 'Amit Sharma', feedback: 'This app made my fitness journey smooth and enjoyable. Love the progress tracking!', rating: 5 },
+	{ id: '2', name: 'Riya Patel', feedback: 'Very easy to use and helps me stay consistent. Highly recommended!', rating: 5 },
+	{ id: '3', name: 'Vikram Singh', feedback: 'The workout plans are perfect for beginners like me. I feel more confident.', rating: 5 },
+	{ id: '4', name: 'Sneha Iyer', feedback: 'Simple, clean, and effective. I\'ve seen real results in 3 months.', rating: 5 },
+	{ id: '5', name: 'Maya Gupta', feedback: 'Lost 15kg in 6 months! The meal plans and workout routines are fantastic.', rating: 5 },
+	{ id: '6', name: 'Karan Joshi', feedback: 'The community feature keeps me motivated. Love competing with friends!', rating: 5 },
+	{ id: '7', name: 'Ananya Roy', feedback: 'Perfect for busy professionals. Quick workouts that actually work!', rating: 5 },
+	{ id: '8', name: 'Deepak Kumar', feedback: 'The AI coach suggestions are spot-on. Feels like having a personal trainer.', rating: 5 },
+	{ id: '9', name: 'Kavya Nair', feedback: 'Amazing transformation in just 4 months. The app adapts to my progress perfectly.', rating: 5 },
+	{ id: '10', name: 'Rahul Mehta', feedback: 'Customer support is amazing. They respond quickly and genuinely care.', rating: 5 },
+	{ id: '11', name: 'Priya Desai', feedback: 'Best fitness app I\'ve tried so far. It keeps me motivated daily.', rating: 5 },
+	{ id: '12', name: 'Arjun Reddy', feedback: 'The progress tracking and reminders are super helpful. Totally worth it!', rating: 5 },
+	{ id: '13', name: 'Rohan Shah', feedback: 'Incredible results! The personalized workouts helped me achieve my goals faster.', rating: 5 },
+	{ id: '14', name: 'Neha Kapoor', feedback: 'Love the variety of exercises. Never gets boring and always challenging.', rating: 5 },
 ];
 
 export default function HomeScreen() {
@@ -117,11 +127,21 @@ function ActivityCard({ name, description, imageId }: { name: ActivityType; desc
 	);
 }
 
-function TestimonialCard({ name, feedback }: { name: string; feedback: string }) {
+function TestimonialCard({ name, feedback, rating }: { name: string; feedback: string; rating: number }) {
 	return (
 		<View style={styles.testimonialCard}>
+			<View style={styles.ratingContainer}>
+				{[...Array(rating)].map((_, i) => (
+					<ThemedText key={i} style={styles.star}>⭐</ThemedText>
+				))}
+			</View>
 			<ThemedText type="default" style={styles.testimonialText}>"{feedback}"</ThemedText>
-			<ThemedText type="defaultSemiBold" style={styles.testimonialName}>- {name}</ThemedText>
+			<View style={styles.authorContainer}>
+				<View style={styles.avatar}>
+					<ThemedText style={styles.avatarText}>{name.charAt(0)}</ThemedText>
+				</View>
+				<ThemedText type="defaultSemiBold" style={styles.testimonialName}>{name}</ThemedText>
+			</View>
 		</View>
 	);
 }
@@ -227,26 +247,53 @@ const styles = StyleSheet.create({
 		width: 36,
 		height: 36,
 		borderRadius: 18,
-		backgroundColor: '#ccc',
+		backgroundColor: '#007AFF',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	testimonialsList: {
 		paddingHorizontal: 4,
 	},
 	testimonialCard: {
-		width: 280,
-		marginRight: 12,
-		padding: 16,
-		borderRadius: 12,
-		backgroundColor: 'rgba(127,127,127,0.05)',
-		gap: 8,
+		width: 300,
+		marginRight: 16,
+		padding: 20,
+		borderRadius: 16,
+		backgroundColor: 'rgba(127,127,127,0.08)',
+		gap: 12,
+		shadowColor: '#000',
+		shadowOpacity: 0.1,
+		shadowRadius: 8,
+		shadowOffset: { width: 0, height: 4 },
+		elevation: 4,
+	},
+	ratingContainer: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		gap: 4,
+	},
+	star: {
+		fontSize: 16,
 	},
 	testimonialText: {
 		fontStyle: 'italic',
-		lineHeight: 20,
+		lineHeight: 22,
+		textAlign: 'center',
+		fontSize: 15,
+	},
+	authorContainer: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
+		gap: 10,
+	},
+	avatarText: {
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: '#fff',
 	},
 	testimonialName: {
-		textAlign: 'right',
-		opacity: 0.8,
+		fontWeight: '600',
 	},
 	rankingCard: {
 		flexDirection: 'row',

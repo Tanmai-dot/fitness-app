@@ -78,8 +78,8 @@ export default function SignupScreen() {
 	return (
 		<ScrollView contentContainerStyle={styles.container}>
 			<ThemedView style={styles.header}>
-				<ThemedText type="title">Create Account</ThemedText>
-				<ThemedText type="default">Join our fitness community</ThemedText>
+				<ThemedText type="title" style={{ fontSize: 28, color: '#1E293B' }}>💪 Create Account</ThemedText>
+				<ThemedText type="default" style={{ fontSize: 16, opacity: 0.7, textAlign: 'center' }}>Join thousands of athletes and start your fitness journey today!</ThemedText>
 			</ThemedView>
 
 			<View style={styles.form}>
@@ -251,25 +251,47 @@ const styles = StyleSheet.create({
 	container: {
 		padding: 20,
 		paddingTop: 60,
+		backgroundColor: '#F8FAFC',
 	},
 	header: {
 		alignItems: 'center',
 		marginBottom: 32,
-		gap: 8,
+		gap: 12,
+		padding: 24,
+		backgroundColor: '#FFFFFF',
+		borderRadius: 20,
+		shadowColor: '#000',
+		shadowOpacity: 0.05,
+		shadowRadius: 10,
+		shadowOffset: { width: 0, height: 2 },
+		elevation: 3,
 	},
 	form: {
 		gap: 20,
+		padding: 24,
+		backgroundColor: '#FFFFFF',
+		borderRadius: 20,
+		shadowColor: '#000',
+		shadowOpacity: 0.05,
+		shadowRadius: 10,
+		shadowOffset: { width: 0, height: 2 },
+		elevation: 3,
 	},
 	inputGroup: {
 		gap: 8,
 	},
 	input: {
 		borderWidth: 1,
-		borderColor: 'rgba(127,127,127,0.3)',
+		borderColor: '#D1D5DB',
 		borderRadius: 12,
 		padding: 16,
 		fontSize: 16,
-		backgroundColor: '#fff',
+		backgroundColor: '#FFFFFF',
+		shadowColor: '#000',
+		shadowOpacity: 0.02,
+		shadowRadius: 4,
+		shadowOffset: { width: 0, height: 1 },
+		elevation: 1,
 	},
 	row: {
 		flexDirection: 'row',
@@ -280,17 +302,19 @@ const styles = StyleSheet.create({
 	},
 	photoButton: {
 		borderWidth: 2,
-		borderColor: 'rgba(127,127,127,0.3)',
+		borderColor: '#3B82F6',
 		borderStyle: 'dashed',
 		borderRadius: 12,
 		padding: 20,
 		alignItems: 'center',
 		justifyContent: 'center',
 		minHeight: 120,
+		backgroundColor: '#EFF6FF',
 	},
 	photoButtonText: {
 		fontSize: 16,
-		opacity: 0.7,
+		color: '#3B82F6',
+		fontWeight: '600',
 	},
 	photoPreview: {
 		width: '100%',
@@ -306,12 +330,13 @@ const styles = StyleSheet.create({
 		padding: 12,
 		borderRadius: 8,
 		borderWidth: 1,
-		borderColor: 'rgba(127,127,127,0.3)',
+		borderColor: '#D1D5DB',
 		alignItems: 'center',
+		backgroundColor: '#F9FAFB',
 	},
 	genderSelected: {
-		backgroundColor: '#007AFF',
-		borderColor: '#007AFF',
+		backgroundColor: '#3B82F6',
+		borderColor: '#3B82F6',
 	},
 	genderText: {
 		fontSize: 16,
@@ -321,25 +346,32 @@ const styles = StyleSheet.create({
 		fontWeight: '600',
 	},
 	signupButton: {
-		backgroundColor: '#007AFF',
+		backgroundColor: '#3B82F6',
 		padding: 18,
 		borderRadius: 12,
 		alignItems: 'center',
 		marginTop: 12,
+		shadowColor: '#3B82F6',
+		shadowOpacity: 0.3,
+		shadowRadius: 8,
+		shadowOffset: { width: 0, height: 4 },
+		elevation: 5,
 	},
 	signupButtonText: {
-		color: '#fff',
+		color: '#FFFFFF',
 		fontSize: 18,
-		fontWeight: '600',
+		fontWeight: 'bold',
 	},
 	loginLink: {
 		textAlign: 'center',
-		color: '#007AFF',
+		color: '#3B82F6',
 		fontSize: 16,
 		marginTop: 16,
+		fontWeight: '500',
 	},
 	error: {
-		color: '#FF3B30',
+		color: '#EF4444',
 		fontSize: 14,
+		fontWeight: '500',
 	},
 });
